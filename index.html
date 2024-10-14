@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Ollama Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="vintage-container">
+        <div class="vintage-header">
+            <h1>Ollama Assistant</h1>
+        </div>
+        <div id="screen">
+            <div id="output" class="output-box">
+                <!-- Output for Ollama response -->
+            </div>
+            <textarea id="userInput" placeholder="Type your question..." class="input-box"></textarea>
+            <button id="sendButton">Ask Ollama</button>
+            <select id="modelSelect" class="model-select">
+                <option value="llama3.2:latest">llama3.2:latest</option>
+                <option value="phi3:latest">phi3:latest</option>
+                <option value="model3">Model 3</option>
+            </select>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+
+</html>
