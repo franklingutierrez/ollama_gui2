@@ -50,7 +50,8 @@ body {
     box-sizing: border-box;
 }
 
-#sendButton {
+#sendButton,
+#stopButton {
     padding: 10px 20px;
     background-color: #000;
     color: #fff;
@@ -58,11 +59,17 @@ body {
     cursor: pointer;
     margin-bottom: 10px;
 }
-
-#sendButton:hover {
-    background-color: #444;
+#stopButton{
+    background-color: #c33a3a;
 }
 
+#sendButton:hover,
+#stopButton:hover {
+    background-color: #444;
+}
+#stopButton:hover {
+    background-color: #db6d6d;
+}
 .model-select {
     margin-bottom: 10px;
     padding: 5px;

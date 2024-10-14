@@ -1,3 +1,6 @@
+let currentReader = null;
+let stopRequested = false;
+
 document.getElementById('sendButton').addEventListener('click', function() {
     const userInput = document.getElementById('userInput').value;
     const selectedModel = document.getElementById('modelSelect').value;
@@ -18,6 +21,10 @@ document.getElementById('sendButton').addEventListener('click', function() {
     ollamaParagraph.className = 'ollama-text';
     outputBox.appendChild(ollamaParagraph);
 
+    // Display stop button
+    document.getElementById('stopButton').style.display = 'block';
+    stopRequested = false;
+
     // Call the Python backend (assuming a Flask server running locally)
     fetch('http://127.0.0.1:5000/ask', {
         method: 'POST',
@@ -30,13 +37,19 @@ document.getElementById('sendButton').addEventListener('click', function() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const reader = response.body.getReader();
+        currentReader = response.body.getReader();
         const decoder = new TextDecoder('utf-8');
         let result = '';
 
         function read() {
-            return reader.read().then(({ done, value }) => {
+            if (stopRequested) {
+                currentReader.cancel();
+                document.getElementById('stopButton').style.display = 'none';
+                return;
+            }
+            return currentReader.read().then(({ done, value }) => {
                 if (done) {
+                    document.getElementById('stopButton').style.display = 'none';
                     return;
                 }
                 const chunk = decoder.decode(value, { stream: true });
@@ -66,7 +79,13 @@ document.getElementById('sendButton').addEventListener('click', function() {
         errorParagraph.className = 'error-text';
         errorParagraph.textContent = 'Error: Could not reach the server.';
         outputBox.appendChild(errorParagraph);
+        document.getElementById('stopButton').style.display = 'none';
     });
 
     document.getElementById('userInput').value = '';
+});
+
+document.getElementById('stopButton').addEventListener('click', function() {
+    stopRequested = true;
+    document.getElementById('stopButton').style.display = 'none';
 });

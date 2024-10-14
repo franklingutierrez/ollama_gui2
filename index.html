@@ -11,17 +11,18 @@
 <body>
     <div id="vintage-container">
         <div class="vintage-header">
-            <h1>Ollama Assistant</h1>
+            <h1>Asistente GUIRATEC</h1>
         </div>
         <div id="screen">
             <div id="output" class="output-box">
                 <!-- Output for Ollama response -->
             </div>
-            <textarea id="userInput" placeholder="Type your question..." class="input-box"></textarea>
-            <button id="sendButton">Ask Ollama</button>
+            <textarea id="userInput" placeholder="Escriba su pregunta..." class="input-box"></textarea>
+            <button id="sendButton"> Preguntame</button>
+            <button id="stopButton" style="display: none;">Interrumpir</button>
             <select id="modelSelect" class="model-select">
                 <option value="llama3.2:latest">llama3.2:latest</option>
-                <option value="phi3:latest">phi3:latest</option>
+                <option value="model2">Model 2</option>
                 <option value="model3">Model 3</option>
             </select>
         </div>
